@@ -14,7 +14,7 @@ The really painful solution is described [here](https://github.com/pablo67340/GU
 <dependency>
 	<groupId>space.arim</groupId>
 	<artifactId>legacyitemconstructor</artifactId>
-	<version>${INSERT_LATEST_VERSION}</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<scope>provided</scope>
 </dependency>
 ```
