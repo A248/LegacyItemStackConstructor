@@ -1,5 +1,5 @@
 # LegacyItemStackConstructor
-A very simple project for using Spigot's ItemStack(int, int, short) constructor in multi-version plugins.
+A very simple project for using Spigot's deprecated/removed ItemStack(int, int, short) constructor in multi-version plugins.
 
 ## Introduction
 
@@ -9,3 +9,50 @@ The really painful solution is described [here](https://github.com/pablo67340/GU
 
 ## The Solution
 
+**1.** Add the following dependency to your pom.xml:
+```xml
+<dependency>
+	<groupId>space.arim</groupId>
+	<artifactId>legacyitemconstructor</artifactId>
+	<version>${INSERT_LATEST_VERSION}</version>
+	<scope>provided</scope>
+</dependency>
+```
+
+**2.** Add the following repository:
+```xml
+<repository>
+	<id>arim-repo</id>
+	<url>https://dl.cloudsmith.io/public/anand-beh/arim-repo/maven/</url>
+</repository>
+```
+
+**3.** Shade the dependency using maven-shade-plugin:
+```xml
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-shade-plugin</artifactId>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>shade</goal>
+			</goals>
+			<configuration>
+				<artifactSet>
+					<includes>
+						<include>space.arim:legacyitemconstructor</include>
+					</includes>
+				</artifactSet>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+```
+
+**4.** Call the appropriate method:
+```java
+int type, amount;
+short damage;
+ItemStack legacyResolvedItem = LegacyItemConstructor.invoke(type, amount, damage);
+```
