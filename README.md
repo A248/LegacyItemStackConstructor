@@ -5,7 +5,7 @@ A very simple project for using Spigot's deprecated/removed ItemStack(int, int, 
 
 You may be developing a Spigot plugin with support for multiple versions. You want to support MC 1.8. To do this, you need to call the constructor `ItemStack(int, int, short)` for *1.8.8 only*. However, the rest of your plugin must build against a newer version of Spigot. The constructor doesn't exist in newer versions.
 
-The really painful solution is described [here](https://github.com/pablo67340/GUIShop/pull/44#issuecomment-601844449) – a disjointed build process which is very frustrating.
+A really painful solution is described [here](https://github.com/pablo67340/GUIShop/pull/44#issuecomment-601844449) – a disjointed build process which is very frustrating.
 
 ## The Solution
 
@@ -14,16 +14,16 @@ The really painful solution is described [here](https://github.com/pablo67340/GU
 <dependency>
 	<groupId>space.arim</groupId>
 	<artifactId>legacyitemconstructor</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
-	<scope>provided</scope>
+	<version>0.1.2-SNAPSHOT</version>
+	<optional>true</optional> <!-- Prevents transitivity -->
 </dependency>
 ```
 
 **2.** Add the following repository:
 ```xml
 <repository>
-	<id>arim-repo</id>
-	<url>https://dl.cloudsmith.io/public/anand-beh/arim-repo/maven/</url>
+	<id>arim-mvn-lgpl3</id>
+	<url>https://mvn-repo.arim.space/lesser-gpl3/</url>
 </repository>
 ```
 
